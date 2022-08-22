@@ -60,6 +60,10 @@ class FirebaseAuthService {
                             break
                         }
                     }
+                } else {
+                    Auth.auth().signIn(with: credential) { (result, error) in
+                        completion(error)
+                    }
                 }
                 
                 completion(error)
@@ -100,9 +104,11 @@ class FirebaseAuthService {
                             break
                         }
                     }
+                } else {
+                    Auth.auth().signIn(with: credential) { (result, error) in
+                        completion(error)
+                    }
                 }
-                
-                completion(error)
             }
         } else {
             Auth.auth().signIn(with: credential) { (result, error) in
