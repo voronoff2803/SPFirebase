@@ -50,6 +50,16 @@ class FirebaseAuthService {
         if Auth.auth().currentUser?.isAnonymous == true {
             let user = Auth.auth().currentUser!
             user.link(with: credential) { (result, error) in
+                if let result = result {
+                    for i in result.user.providerData {
+                        if i.displayName != nil {
+                            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                            changeRequest?.displayName = displayName
+                            changeRequest?.commitChanges
+                        }
+                    }
+                }
+                
                 completion(error)
             }
         } else {
@@ -75,10 +85,19 @@ class FirebaseAuthService {
         
         let credential = GoogleAuthProvider.credential(withIDToken: token, accessToken: accessToken)
         
-        
         if Auth.auth().currentUser?.isAnonymous == true {
             let user = Auth.auth().currentUser!
             user.link(with: credential) { (result, error) in
+                if let result = result {
+                    for i in result.user.providerData {
+                        if i.displayName != nil {
+                            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                            changeRequest?.displayName = displayName
+                            changeRequest?.commitChanges
+                        }
+                    }
+                }
+                
                 completion(error)
             }
         } else {
