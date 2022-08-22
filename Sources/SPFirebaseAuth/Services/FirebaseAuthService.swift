@@ -52,10 +52,12 @@ class FirebaseAuthService {
             user.link(with: credential) { (result, error) in
                 if let result = result {
                     for i in result.user.providerData {
-                        if i.displayName != nil {
+                        if let displayName = i.displayName {
                             let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                             changeRequest?.displayName = displayName
                             changeRequest?.commitChanges
+                            
+                            break
                         }
                     }
                 }
@@ -90,10 +92,12 @@ class FirebaseAuthService {
             user.link(with: credential) { (result, error) in
                 if let result = result {
                     for i in result.user.providerData {
-                        if i.displayName != nil {
+                        if let displayName = i.displayName {
                             let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                             changeRequest?.displayName = displayName
                             changeRequest?.commitChanges
+                            
+                            break
                         }
                     }
                 }
