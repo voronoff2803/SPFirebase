@@ -60,13 +60,12 @@ class FirebaseAuthService {
                             break
                         }
                     }
+                    completion(error)
                 } else {
                     Auth.auth().signIn(with: credential) { (result, error) in
                         completion(error)
                     }
                 }
-                
-                completion(error)
             }
         } else {
             Auth.auth().signIn(with: credential) { (result, error) in
@@ -78,16 +77,16 @@ class FirebaseAuthService {
     static func signInGoogle(token: String, accessToken: String?, completion: @escaping (Error?) -> Void) {
         guard let accessToken = accessToken else {
             let error = NSError(
-                      domain: "GIDSignInError",
-                      code: -1,
-                      userInfo: [
-                        NSLocalizedDescriptionKey: "Unexpected sign in result: required authentication data is missing.",
-                      ]
-                    )
+                domain: "GIDSignInError",
+                code: -1,
+                userInfo: [
+                    NSLocalizedDescriptionKey: "Unexpected sign in result: required authentication data is missing.",
+                ]
+            )
             completion(error)
             return
         }
-
+        
         
         let credential = GoogleAuthProvider.credential(withIDToken: token, accessToken: accessToken)
         
@@ -104,6 +103,7 @@ class FirebaseAuthService {
                             break
                         }
                     }
+                    completion(error)
                 } else {
                     Auth.auth().signIn(with: credential) { (result, error) in
                         completion(error)
