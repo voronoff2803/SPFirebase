@@ -46,8 +46,16 @@ class FirebaseAuthService {
     
     static func signInApple(token: String, completion: @escaping (Error?) -> Void) {
         let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: token, rawNonce: nil)
-        Auth.auth().signIn(with: credential) { (result, error) in
-            completion(error)
+        
+        if Auth.auth().currentUser?.isAnonymous == true {
+            let user = Auth.auth().currentUser!
+            user.link(with: credential) { (result, error) in
+                completion(error)
+            }
+        } else {
+            Auth.auth().signIn(with: credential) { (result, error) in
+                completion(error)
+            }
         }
     }
     
@@ -66,8 +74,17 @@ class FirebaseAuthService {
 
         
         let credential = GoogleAuthProvider.credential(withIDToken: token, accessToken: accessToken)
-        Auth.auth().signIn(with: credential) { (result, error) in
-            completion(error)
+        
+        
+        if Auth.auth().currentUser?.isAnonymous == true {
+            let user = Auth.auth().currentUser!
+            user.link(with: credential) { (result, error) in
+                completion(error)
+            }
+        } else {
+            Auth.auth().signIn(with: credential) { (result, error) in
+                completion(error)
+            }
         }
     }
     
