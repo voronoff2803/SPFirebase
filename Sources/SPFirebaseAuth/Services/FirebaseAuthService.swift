@@ -55,7 +55,7 @@ class FirebaseAuthService {
                         if let displayName = i.displayName {
                             let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                             changeRequest?.displayName = displayName
-                            changeRequest?.commitChanges
+                            changeRequest?.commitChanges()
                             
                             break
                         }
@@ -95,7 +95,7 @@ class FirebaseAuthService {
                         if let displayName = i.displayName {
                             let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                             changeRequest?.displayName = displayName
-                            changeRequest?.commitChanges
+                            changeRequest?.commitChanges()
                             
                             break
                         }
