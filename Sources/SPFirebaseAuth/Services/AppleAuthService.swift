@@ -58,7 +58,9 @@ class AppleAuthService: NSObject, ASAuthorizationControllerDelegate, ASAuthoriza
             }
             return nil
         }()
-        let data = SPFirebaseAuthData(token: token, name: name, email: appleCredential.email)
+        
+        let authorizationCode = String(data: appleCredential.authorizationCode ?? Data(), encoding: .utf8)
+        let data = SPFirebaseAuthData(token: token, authorizationCode: authorizationCode, name: name, email: appleCredential.email)
         completion?(data)
     }
     

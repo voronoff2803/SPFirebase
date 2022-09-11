@@ -25,6 +25,7 @@ public struct SPFirebaseAuthData {
     
     var token: String
     var accessToken: String?
+    public var authorizationCode: String?
     public var name: String?
     public var email: String?
 }
