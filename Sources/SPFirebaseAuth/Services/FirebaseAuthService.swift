@@ -61,6 +61,10 @@ class FirebaseAuthService {
                         }
                     }
                     completion(error)
+                } else if let pendingCred = (error as? NSError)?.userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential {
+                    Auth.auth().signIn(with: pendingCred) { (result, error) in
+                        completion(error)
+                    }
                 } else {
                     Auth.auth().signIn(with: credential) { (result, error) in
                         completion(error)
@@ -104,6 +108,10 @@ class FirebaseAuthService {
                         }
                     }
                     completion(error)
+                } else if let pendingCred = (error as? NSError)?.userInfo[AuthErrorUserInfoUpdatedCredentialKey] as? AuthCredential {
+                    Auth.auth().signIn(with: pendingCred) { (result, error) in
+                        completion(error)
+                    }
                 } else {
                     Auth.auth().signIn(with: credential) { (result, error) in
                         completion(error)
