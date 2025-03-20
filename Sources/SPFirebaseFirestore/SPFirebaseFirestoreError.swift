@@ -47,7 +47,7 @@ public enum SPFirebaseFirestoreError {
         guard error.domain == FirestoreErrorDomain else{
             return .unknown
         }
-        let code = FirestoreErrorCode(rawValue: error.code)!
+        let code = FirestoreErrorCode.Code(rawValue: error.code)!
         switch code {
         case .OK: return .OK
         case .cancelled: return .cancelled
